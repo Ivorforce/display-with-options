@@ -13,10 +13,13 @@ control while maintaining a close relationship with rust core functionality.
 ### IndentingFormatter
 
 ```rust
+use display_with_options::IndentingFormatter;
+
 fn main() {
-    use display_with_options::IndentingFormatter;
     let mut dst: Vec<u8> = vec![];
+    
     writeln!(dst, "A").unwrap();  // A
+    
     let mut f = IndentingFormatter::new(&mut dst, "\t");
     writeln!(f, "B").unwrap(); // \tB
 }
