@@ -43,7 +43,7 @@ impl<'a> IndentOptions<'a> {
     }
 
     /// Appends the given indentation once, but keeps the previous style for further levels.
-    pub fn appending<'b>(&self, indent: &str) -> IndentOptions<'a> {
+    pub fn appending(&self, indent: &str) -> IndentOptions<'a> {
         IndentOptions {
             full_indentation: format!("{}{}", self.full_indentation, indent),
             next_level: self.next_level,
