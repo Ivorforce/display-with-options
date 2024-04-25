@@ -1,5 +1,6 @@
 use std::fmt::Write;
 
+/// Wraps a Write / Formatter object such that an indentation is inserted after every non-empty newline.
 pub struct IndentingFormatter<'a, 'b> {
     pub writer: &'a mut (dyn Write + 'a),
     pub is_fresh_line: bool,

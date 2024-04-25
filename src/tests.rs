@@ -42,10 +42,8 @@ mod tests {
             Node::new("D", vec![]),
         ]);
 
-        let tree_formatted = format!("{}", with_options(tree.as_ref(), &IndentOptions {
-            full_indentation: String::new(),
-            next_level: "    ",
-        }));
+        let options = IndentOptions::new("    ");
+        let tree_formatted = format!("{}", with_options(tree.as_ref(), &options));
 
         let reference =
 r#"A

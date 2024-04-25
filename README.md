@@ -78,11 +78,7 @@ fn main() {
         Node::new("D", vec![]),
     ]);
 
-    let options = IndentOptions {
-        full_indentation: String::new(),
-        next_level: "    ",
-    };
-    
+    let options = IndentOptions::new("    ");
     println!("{}", with_options(tree.as_ref(), &options));
 }
 ```
