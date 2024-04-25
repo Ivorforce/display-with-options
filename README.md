@@ -1,6 +1,6 @@
 # display_with_options
 
-This tiny crate allows you to pass options around in Display and Debug - like methods.
+This tiny (< 200 LOC) crate allows you to pass options around in Display and Debug.
 
 It also adds a way to indent a formatter implicitly on fresh new lines.
 

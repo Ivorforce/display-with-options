@@ -1,6 +1,6 @@
 //! # display-with-options
 //!
-//! This tiny crate allows you to pass options around in Display and Debug - like methods.
+//! This tiny (< 200 LOC) crate allows you to pass options around in Display and Debug.
 //!
 //! It also adds a way to indent a formatter implicitly on fresh new lines.
 //!
@@ -14,8 +14,11 @@
 //!
 //! ```rust
 //! use display_with_options::IndentingFormatter;
+//!
 //! let mut dst: Vec<u8> = vec![];
+//!
 //! writeln!(dst, "A").unwrap();  // A
+//!
 //! let mut f = IndentingFormatter::new(&mut dst, "\t");
 //! writeln!(f, "B").unwrap(); // \tB
 //! ```
