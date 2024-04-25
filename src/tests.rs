@@ -8,6 +8,15 @@ mod tests {
         children: Vec<Box<Node>>
     }
 
+    impl Node {
+        pub fn new(name: &str, children: Vec<Box<Node>>) -> Box<Node> {
+            Box::new(Node {
+                name: name.to_string(),
+                children
+            })
+        }
+    }
+
     impl<'a> DisplayWithOptions<IndentOptions<'a>> for Node {
         fn fmt(&self, f: &mut Formatter, options: &IndentOptions) -> std::fmt::Result {
             writeln!(f, "{}{}", options, self.name)?;
@@ -26,21 +35,14 @@ mod tests {
 
     #[test]
     fn indent_twice() {
-        let tree = Node {
-            name: "A".to_string(),
-            children: vec![
-                Box::new(Node {
-                    name: "B".to_string(),
-                    children: vec![Box::new(Node { name: "C".to_string(), children: vec![] })]
-                }),
-                Box::new(Node {
-                    name: "D".to_string(),
-                    children: vec![]
-                }),
-            ]
-        };
+        let tree = Node::new("A", vec![
+            Node::new("B", vec![
+                Node::new("C", vec![]),
+            ]),
+            Node::new("D", vec![]),
+        ]);
 
-        let tree_formatted = format!("{}", with_options(&tree, &IndentOptions {
+        let tree_formatted = format!("{}", with_options(tree.as_ref(), &IndentOptions {
             full_indentation: String::new(),
             next_level: "    ",
         }));

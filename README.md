@@ -18,11 +18,17 @@ use display_with_options::IndentingFormatter;
 fn main() {
     let mut dst: Vec<u8> = vec![];
     
-    writeln!(dst, "A").unwrap();  // A
+    writeln!(dst, "A").unwrap();
     
-    let mut f = IndentingFormatter::new(&mut dst, "\t");
-    writeln!(f, "B").unwrap(); // \tB
+    let mut f = IndentingFormatter::new(&mut dst, "    ");
+    writeln!(f, "B").unwrap();
 }
+```
+
+Result:
+```
+A
+    B
 ```
 
 ### DisplayWithOptions
@@ -35,6 +41,15 @@ use display_with_options::{DisplayWithOptions, IndentingFormatter, IndentOptions
 struct Node {
     name: String,
     children: Vec<Box<Node>>
+}
+
+impl Node {
+    pub fn new(name: &str, children: Vec<Box<Node>>) -> Box<Node> {
+        Box::new(Node {
+            name: name.to_string(),
+            children
+        })
+    }
 }
 
 impl<'a> DisplayWithOptions<IndentOptions<'a>> for Node {
@@ -56,27 +71,26 @@ impl<'a> DisplayWithOptions<IndentOptions<'a>> for Node {
 // Test the Code
 
 fn main() {
-    let tree = Node {
-        name: "A".to_string(),
-        children: vec![
-            Box::new(Node {
-                name: "B".to_string(),
-                children: vec![Box::new(Node { name: "C".to_string(), children: vec![] })]
-            }),
-            Box::new(Node {
-                name: "D".to_string(),
-                children: vec![]
-            }),
-        ]
+    let tree = Node::new("A", vec![
+        Node::new("B", vec![
+            Node::new("C", vec![]),
+        ]),
+        Node::new("D", vec![]),
+    ]);
+
+    let options = IndentOptions {
+        full_indentation: String::new(),
+        next_level: "    ",
     };
     
-     let tree_formatted = format!("{}", with_options(&tree, &IndentOptions {
-         full_indentation: String::new(),
-         next_level: "    ",
-     }));
-     // A\n
-     //     B\n
-     //         C\n
-     //     D\n
+    println!("{}", with_options(tree.as_ref(), &options));
 }
+```
+
+Result:
+```
+A
+    B
+        C
+    D
 ```
