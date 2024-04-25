@@ -47,7 +47,7 @@ impl<'a, 'b, Options, Object: DebugWithOptions<Options>> Debug for ObjectWithOpt
     }
 }
 
-pub fn with_options<'a, 'b, Options, Object: DisplayWithOptions<Options>>(object: &'a Object, options: &'b Options) -> ObjectWithOptions<'a, 'b, Options, Object> {
+pub fn with_options<'a, 'b, Options, Object>(object: &'a Object, options: &'b Options) -> ObjectWithOptions<'a, 'b, Options, Object> {
     ObjectWithOptions {
         object,
         options
