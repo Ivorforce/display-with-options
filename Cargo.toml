@@ -1,5 +1,6 @@
 [package]
 name = "display_with_options"
+description = "Display and Debug with options passed around. Indentation functionality."
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
