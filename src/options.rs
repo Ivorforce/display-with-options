@@ -2,8 +2,8 @@ use std::fmt::{Debug, Display, Formatter};
 use crate::debug::DebugWithOptions;
 use crate::display::DisplayWithOptions;
 
-/// Indentation state. Holds what was previously intended,
-///  and what is intended for further indention.
+/// Indentation state. Holds what was previously indented,
+///  and what is intended for further indentation.
 #[derive(Debug)]
 pub struct IndentOptions<'a> {
     pub full_indentation: String,
